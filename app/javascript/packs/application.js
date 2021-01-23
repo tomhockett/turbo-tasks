@@ -22,3 +22,5 @@ application.load(definitionsFromContext(context))
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+import "controllers"

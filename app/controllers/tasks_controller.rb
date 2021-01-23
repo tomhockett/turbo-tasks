@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %w[ show edit update destroy ]
+  before_action :set_task, only: %w[show edit update destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.all.sort_by(&:created_at)
+    @task ||= Task.new
   end
 
   # GET /tasks/1
@@ -62,13 +63,14 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def task_params
-      params.require(:task).permit(:title, :completed)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def task_params
+    params.require(:task).permit(:title, :completed)
+  end
 end
