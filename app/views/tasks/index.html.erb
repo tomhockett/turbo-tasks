@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<div data-controller="hello">
+  <input data-hello-target="name" type="text" placeholder="Open your console . . .">
+  <button data-action="click->hello#greet">Greet</button>
+</div>
+
+<h1>Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Completed at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <%= content_tag :tr, id: dom_id(task), class: dom_class(task) do %>
+        <td><%= check_box_tag nil, nil, task.completed_at? %></td>
+        <td><%= task.title %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task', new_task_path %>
