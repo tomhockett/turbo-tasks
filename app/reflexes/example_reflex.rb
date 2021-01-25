@@ -38,7 +38,7 @@ class ExampleReflex < ApplicationReflex
   end
 
   def form
-    todo = Task.new(title: element[:value])
-    todo.valid?
+    @todo = Task.new(title: element[:value])
+    @todo.valid?
   end
 end
